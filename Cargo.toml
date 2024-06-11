@@ -1,0 +1,15 @@
+[package]
+name = "my-website-api"
+version = "0.1.0"
+edition = "2021"
+authors = ["Josh Arnow"]
+
+# NOTE - https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# NOTE - https://www.reddit.com/r/rust/comments/a8kzo6/psa_writing_for_crates_in_cargotoml_wont_always/
+axum = { version = "0.7.5" }
+tokio = { version = "1.37.0", features = ["full"] }
+serde = { version = "1.0.202", features = ["derive"] }
+cargo-watch = "8.5.2"
+tower-http = "0.5.2"
