@@ -5,11 +5,21 @@ edition = "2021"
 authors = ["Josh Arnow"]
 
 # NOTE - https://doc.rust-lang.org/cargo/reference/manifest.html
+# NOTE - https://www.reddit.com/r/rust/comments/a8kzo6/psa_writing_for_crates_in_cargotoml_wont_always/
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# NOTE - https://www.reddit.com/r/rust/comments/a8kzo6/psa_writing_for_crates_in_cargotoml_wont_always/
-axum = { version = "0.7.5" }
-tokio = { version = "1.37.0", features = ["full"] }
-serde = { version = "1.0.202", features = ["derive"] }
+axum = { version = "0.6", features = ["json"] }
+tokio = { version = "1", features = ["macros"] }
+hyper = { version = "0.14", features = ["full"] }
+sqlx = { version = "0.6", features = [ "runtime-tokio-rustls", "postgres", "offline"] }
+serde = { version = "1.0", features = ["derive"] }
+anyhow = "1.0"
+dotenvy = "0.15"
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }
 cargo-watch = "8.5.2"
-tower-http = "0.5.2"
+# tower-http = "0.5.2"
