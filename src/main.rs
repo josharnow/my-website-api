@@ -14,14 +14,14 @@ use axum::{
 use dotenvy::dotenv;
 
 use serde::{Deserialize, Serialize};
-use sqlx::postgres::PgPoolOptions;
+// use sqlx::postgres::PgPoolOptions;
 // use sqlx::{Pool, Postgres};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenv().ok();
     
-    let url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set.");
+    // let url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set.");
     // NOTE - Breaks below
     // let pool = PgPoolOptions::new()
     //     .max_connections(5)
@@ -31,13 +31,16 @@ async fn main() -> anyhow::Result<()> {
 
     // sqlx::migrate!("./migrations").run(&pool).await?;
 
+    let tcp_listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+
     let addr: std::net::SocketAddr = std::net::SocketAddr::from(([0, 0, 0, 0], 3000));
 
     println!("listening on {}", addr);
 
-    axum::Server::bind(&addr)
+    axum::serve::serve(tcp_listener, app().into_make_service())
+    // axum::Server::bind(&addr)
     // .serve(app().layer(Extension(pool)).into_make_service())
-        .serve(app().into_make_service())
+        // .serve(app().into_make_service())
         .await
         .unwrap();
 

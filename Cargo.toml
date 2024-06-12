@@ -11,10 +11,11 @@ authors = ["Josh Arnow"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.6", features = ["json"] }
-tokio = { version = "1", features = ["macros"] }
-hyper = { version = "0.14", features = ["full"] }
-sqlx = { version = "0.6", features = [ "runtime-tokio-rustls", "postgres", "offline"] }
+axum = { version = "0.7.5", features = ["json"] }
+tokio = { version = "1.38.0", features = ["full"] }
+hyper = { version = "1.3.1", features = ["full"] }
+# sqlx = { version = "0.7.4", features = [ "runtime-tokio-rustls", "postgres", "offline"] }
+sqlx = { version = "0.7.4" }
 serde = { version = "1.0", features = ["derive"] }
 anyhow = "1.0"
 dotenvy = "0.15"
@@ -23,3 +24,4 @@ dotenvy = "0.15"
 tower = { version = "0.4", features = ["util"] }
 cargo-watch = "8.5.2"
 # tower-http = "0.5.2"
+# rt-multi-thread = "0.1.0"
