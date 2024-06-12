@@ -37,8 +37,10 @@ RUN cargo build --release --target x86_64-unknown-linux-musl
 # Create a new stage with a minimal image
 FROM scratch
 COPY --from=builder /my-website-api/target/x86_64-unknown-linux-musl/release/my-website-api /my-website-api
-ENTRYPOINT [ "/my-website-api" ]
+# ENTRYPOINT [ "/target/release/my-website-api" ]
+ENTRYPOINT [ "/my-website-api", "--port", "3000" ]
 EXPOSE 3000
+# NOTE - https://stackoverflow.com/questions/52591197/exposing-configurable-argument-port-at-build
 
 
 # # NOTE - https://developer.oracle.com/learn/technical-articles/DEVO_Technical-Content/COREE91516B15F61454EA0D028431A811BD9/rust-building-apis-on-oci#copy

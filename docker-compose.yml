@@ -8,9 +8,11 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:3000/tcp"
     depends_on:
       - db
+    expose:
+      - "3000"
   db:
     image: postgres:15.2-alpine
     restart: always

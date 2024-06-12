@@ -42,7 +42,8 @@ async fn main() -> anyhow::Result<()> {
     // .serve(app().layer(Extension(pool)).into_make_service())
         // .serve(app().into_make_service())
         .await
-        .unwrap();
+        .expect("Failed to start server");
+        // .unwrap();
 
     Ok(())
 }
