@@ -7,7 +7,7 @@ use axum::{
       // post
     },
     Extension,
-    // Json, 
+    Json, 
     Router,
 };
 
@@ -31,7 +31,7 @@ async fn main() -> anyhow::Result<()> {
 
     // sqlx::migrate!("./migrations").run(&pool).await?;
 
-    let addr: std::net::SocketAddr = std::net::SocketAddr::from(([0, 0, 0, 0], 3030));
+    let addr: std::net::SocketAddr = std::net::SocketAddr::from(([0, 0, 0, 0], 3000));
 
     println!("listening on {}", addr);
 
@@ -63,8 +63,18 @@ fn app() -> Router {
         // .route("/user/:id", delete(delete_user))
 }
 
-async fn handler() -> &'static str {
-    "Let's Get Rusty!"
+// async fn handler() -> &'static str {
+//     "Let's Get Rusty!"
+// }
+
+#[derive(serde::Serialize)]
+struct Message {
+    message: String,
+}
+async fn handler() -> Json<Message> {
+    Json(Message {
+        message: String::from("Hello, World!"),
+    })
 }
 
 // async fn get_users(state: Extension<Pool<Postgres>>) -> Json<Vec<User>> {
